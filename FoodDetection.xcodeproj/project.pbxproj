@@ -6,6 +6,12 @@
 	objectVersion = 77;
 	objects = {
 
+/* Begin PBXBuildFile section */
+		AC36DB962D8F7E15002CF27C /* FirebaseAuth in Frameworks */ = {isa = PBXBuildFile; productRef = AC36DB952D8F7E15002CF27C /* FirebaseAuth */; };
+		AC36DB982D8FB2F6002CF27C /* FirebaseFirestore in Frameworks */ = {isa = PBXBuildFile; productRef = AC36DB972D8FB2F6002CF27C /* FirebaseFirestore */; };
+		AC36DB9A2D8FD510002CF27C /* FirebaseDatabase in Frameworks */ = {isa = PBXBuildFile; productRef = AC36DB992D8FD510002CF27C /* FirebaseDatabase */; };
+/* End PBXBuildFile section */
+
 /* Begin PBXContainerItemProxy section */
 		AC1B43B52D6850B800463279 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
@@ -52,6 +58,9 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				AC36DB9A2D8FD510002CF27C /* FirebaseDatabase in Frameworks */,
+				AC36DB962D8F7E15002CF27C /* FirebaseAuth in Frameworks */,
+				AC36DB982D8FB2F6002CF27C /* FirebaseFirestore in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -112,6 +121,9 @@
 			);
 			name = FoodDetection;
 			packageProductDependencies = (
+				AC36DB952D8F7E15002CF27C /* FirebaseAuth */,
+				AC36DB972D8FB2F6002CF27C /* FirebaseFirestore */,
+				AC36DB992D8FD510002CF27C /* FirebaseDatabase */,
 			);
 			productName = FoodDetection;
 			productReference = AC1B43A32D6850B600463279 /* FoodDetection.app */;
@@ -195,6 +207,9 @@
 			);
 			mainGroup = AC1B439A2D6850B600463279;
 			minimizedProjectReferenceProxies = 1;
+			packageReferences = (
+				AC36DB942D8F7B53002CF27C /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */,
+			);
 			preferredProjectObjectVersion = 77;
 			productRefGroup = AC1B43A42D6850B600463279 /* Products */;
 			projectDirPath = "";
@@ -392,6 +407,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"FoodDetection/Preview Content\"";
+				DEVELOPMENT_TEAM = Y5GF6MKQ37;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				"INFOPLIST_KEY_UIApplicationSceneManifest_Generation[sdk=iphoneos*]" = YES;
@@ -429,6 +445,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"FoodDetection/Preview Content\"";
+				DEVELOPMENT_TEAM = Y5GF6MKQ37;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				"INFOPLIST_KEY_UIApplicationSceneManifest_Generation[sdk=iphoneos*]" = YES;
@@ -583,6 +600,35 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		AC36DB942D8F7B53002CF27C /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/firebase/firebase-ios-sdk";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 11.10.0;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		AC36DB952D8F7E15002CF27C /* FirebaseAuth */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = AC36DB942D8F7B53002CF27C /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseAuth;
+		};
+		AC36DB972D8FB2F6002CF27C /* FirebaseFirestore */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = AC36DB942D8F7B53002CF27C /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseFirestore;
+		};
+		AC36DB992D8FD510002CF27C /* FirebaseDatabase */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = AC36DB942D8F7B53002CF27C /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseDatabase;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = AC1B439B2D6850B600463279 /* Project object */;
 }

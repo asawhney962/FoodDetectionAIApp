@@ -6,12 +6,21 @@
 //
 
 import SwiftUI
+import FirebaseCore
 
 @main
+
 struct FoodDetectionApp: App {
+    
+    init() {
+        FirebaseApp.configure() // Initialize Firebase
+    }
+    
     var body: some Scene {
         WindowGroup {
             ContentView()
         }
     }
 }
+
+
