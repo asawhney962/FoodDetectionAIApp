@@ -18,7 +18,7 @@ struct FoodDetectionApp: App {
     
     var body: some Scene {
         WindowGroup {
-            ContentView()
+            LogIn()
         }
     }
 }

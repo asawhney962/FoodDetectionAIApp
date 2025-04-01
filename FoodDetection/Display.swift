@@ -6,10 +6,33 @@
 //
 
 import SwiftUI
+import Firebase
+import FirebaseAuth
+import FirebaseFirestore
 
 struct Display: View {
+    init() {
+        let appearance = UITabBarAppearance()
+    }
     var body: some View {
-        Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
+        TabView {
+            Tab("Home", systemImage: "house") {
+                ScanFood()
+            }
+            Tab("Meals", systemImage: "fork.knife.circle") {
+                History()
+            }
+            Tab("Food Chat", systemImage: "message") {
+                FoodChat()
+            }
+            Tab("Profile", systemImage: "person") {
+                Profile()
+            }
+        }
+        .tint(.yellow)
+        .onAppear() {
+            UITabBar.appearance().unselectedItemTintColor = UIColor(Color.black)
+        }
     }
 }
 

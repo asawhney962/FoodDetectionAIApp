@@ -135,7 +135,7 @@ struct SignUp: View {
                 }
                 .frame(maxWidth: .infinity) // Centers everything horizontally
                 .fullScreenCover(isPresented: $isSignedUp) {
-                    ContentView()
+                    LogIn()
                 }
         }
         }

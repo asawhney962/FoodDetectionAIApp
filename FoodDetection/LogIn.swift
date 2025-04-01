@@ -105,7 +105,7 @@ struct LogIn: View {
                     .padding(.bottom, 40)
                 }
                 .fullScreenCover(isPresented: $isLoggedIn) {
-                    ScanFood()
+                    Display()
                 }
             }
         }
