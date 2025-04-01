@@ -9,7 +9,7 @@ import SwiftUI
 import Firebase
 import FirebaseAuth
 
-struct ContentView: View {
+struct LogIn: View {
     @State private var email = ""
     @State private var password = ""
     @State private var isLoggedIn = false
@@ -105,7 +105,7 @@ struct ContentView: View {
                     .padding(.bottom, 40)
                 }
                 .fullScreenCover(isPresented: $isLoggedIn) {
-                    Home()
+                    ScanFood()
                 }
             }
         }
@@ -113,5 +113,5 @@ struct ContentView: View {
 }
 
 #Preview {
-    ContentView()
+    LogIn()
 }

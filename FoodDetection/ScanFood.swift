@@ -10,7 +10,7 @@ import Firebase
 import FirebaseAuth
 import FirebaseFirestore
 
-struct Home: View {
+struct ScanFood: View {
     
     @State private var showSheet: Bool = false
     @State private var showImagePicker: Bool = false
@@ -20,10 +20,8 @@ struct Home: View {
     @State private var isLoggedOut = false
     
     var body: some View {
-        
         NavigationView {
             ZStack {
-                // Background Gradient
                 LinearGradient(gradient: Gradient(colors: [Color("darkGreen"), Color("lightGreen")]),
                                startPoint: .topLeading,
                                endPoint: .bottomTrailing)
@@ -48,21 +46,18 @@ struct Home: View {
                     .padding(.top, -100)
                     .padding(.trailing, 20)
                     
-                    // Greeting Text
                     Text("Hello \(userViewModel.firstName)!")
                         .font(.system(size: 36, weight: .medium))
                         .foregroundColor(.black)
                         .padding(.leading, 40)
                         .frame(maxWidth: .infinity, alignment: .leading)
                     
-                    // Image Display
                     Image(uiImage: image ?? UIImage(named: "fitnessApp")!)
                         .resizable()
                         .frame(width: 300, height: 300)
                         .scaledToFit()
                         .cornerRadius(15)
                     
-                    // Choose Picture Button
                     Button("Scan Food") {
                         self.showSheet = true
                     }
@@ -96,12 +91,12 @@ struct Home: View {
                 userViewModel.fetchUserData()
             }
             .fullScreenCover(isPresented: $isLoggedOut) {
-                ContentView()
+                LogIn()
             }
         }
     }
 }
 
 #Preview {
-    Home()
+    ScanFood()
 }
