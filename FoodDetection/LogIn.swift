@@ -43,6 +43,7 @@ struct LogIn: View {
                             .padding(.leading, 20)
 
                         TextField("Enter your email", text: $email)
+                            .autocapitalization(.none)
                             .padding()
                             .background(Color.white)
                             .cornerRadius(8)
@@ -56,6 +57,7 @@ struct LogIn: View {
                             .padding(.leading, 20)
 
                         SecureField("Enter your password", text: $password)
+                            .autocapitalization(.none)
                             .padding()
                             .background(Color.white)
                             .cornerRadius(8)

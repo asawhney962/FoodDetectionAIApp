@@ -28,7 +28,6 @@ struct SignUp: View {
                                startPoint: .topLeading,
                                endPoint: .bottomTrailing)
                 .edgesIgnoringSafeArea(.all)
-
                 VStack(spacing: 25) {
                     // First Name
                     VStack(alignment: .leading, spacing: 8) {
@@ -61,6 +60,7 @@ struct SignUp: View {
                             .font(.system(size: 20, weight: .light))
                             //.padding(.leading, 20)
                         TextField("Enter your email", text: $email)
+                            .autocapitalization(.none)
                             .padding()
                             .background(Color.white)
                             .cornerRadius(8)
@@ -74,6 +74,7 @@ struct SignUp: View {
                             .font(.system(size: 20, weight: .light))
                             //.padding(.leading, 20)
                         SecureField("Enter your password", text: $password)
+                            .autocapitalization(.none)
                             .padding()
                             .background(Color.white)
                             .cornerRadius(8)
@@ -87,6 +88,7 @@ struct SignUp: View {
                             .font(.system(size: 20, weight: .light))
                             //.padding(.leading, 20)
                         SecureField("Re-enter your password", text: $rePassword)
+                            .autocapitalization(.none)
                             .padding()
                             .background(Color.white)
                             .cornerRadius(8)

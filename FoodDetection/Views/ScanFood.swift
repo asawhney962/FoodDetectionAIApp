@@ -18,9 +18,11 @@ struct ScanFood: View {
     @State private var image: UIImage?
     @StateObject var userViewModel = UserViewModel()
     @State private var isLoggedOut = false
+    @State private var navigationImage: UIImage? = nil
+    @State private var navigateToResults = false
     
     var body: some View {
-        NavigationView {
+        NavigationStack {
             ZStack {
                 LinearGradient(gradient: Gradient(colors: [Color("darkGreen"), Color("lightGreen")]),
                                startPoint: .topLeading,
@@ -81,12 +83,30 @@ struct ScanFood: View {
                                         .cancel()
                                     ])
                     }
+                    NavigationLink(
+                        destination: NutritionResults(
+                            image: .constant(image),
+                            userViewModel: userViewModel
+                        ),
+                        isActive: $navigateToResults
+                    ) {
+                        EmptyView()
+                    }
                 }
-                .frame(maxWidth: .infinity, alignment: .center) // Center the content
+                .frame(maxWidth: .infinity, alignment:  .center)
             }
             .sheet(isPresented: $showImagePicker) {
                 ImagePicker(image: self.$image, isShown: self.$showImagePicker, sourceType: self.sourceType)
             }
+            
+            .onChange(of: image) { newImage in
+                if newImage != nil {
+                    DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
+                        navigateToResults = true
+                    }
+                }
+            }
+            
             .onAppear() {
                 userViewModel.fetchUserData()
             }
@@ -96,7 +116,6 @@ struct ScanFood: View {
         }
     }
 }
-
 #Preview {
     ScanFood()
 }
