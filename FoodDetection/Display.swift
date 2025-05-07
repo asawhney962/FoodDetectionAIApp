@@ -11,6 +11,10 @@ import FirebaseAuth
 import FirebaseFirestore
 
 struct Display: View {
+    @State private var newMeal: Meal? = nil
+    @State private var userViewModel = UserViewModel()
+    @StateObject private var mealViewModel = MealViewModel()
+    
     init() {
         let appearance = UITabBarAppearance()
     }
@@ -30,6 +34,7 @@ struct Display: View {
             }
         }
         .tint(.yellow)
+        .environmentObject(mealViewModel)
         .onAppear() {
             UITabBar.appearance().unselectedItemTintColor = UIColor(Color.black)
         }

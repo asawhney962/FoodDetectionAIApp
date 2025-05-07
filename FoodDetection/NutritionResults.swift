@@ -12,7 +12,9 @@ struct NutritionResults: View {
     @State private var fats: String = ""
     @Environment(\.presentationMode) var presentationMode
     @State private var navigateToResults = false
-    
+
+    @EnvironmentObject var mealViewModel: MealViewModel
+
     var body: some View {
         NavigationStack {
             ZStack {
@@ -22,7 +24,6 @@ struct NutritionResults: View {
                 .edgesIgnoringSafeArea(.all)
                 
                 VStack {
-                    // Display the image
                     Image(uiImage: image ?? UIImage(named: "fitnessApp")!)
                         .resizable()
                         .frame(width: 300, height: 300)
@@ -30,7 +31,6 @@ struct NutritionResults: View {
                         .cornerRadius(15)
                         .clipped()
                     
-                    // Nutritional Info
                     VStack(alignment: .leading, spacing: 15) {
                         HStack {
                             Text("Food:")
@@ -74,8 +74,14 @@ struct NutritionResults: View {
                                 .frame(width: 200)
                         }
 
-                        // Fixed button to navigate to History
                         Button("Add to Meals") {
+                            let info = "Calories: \(calories), Protein: \(protein), Carbs: \(carbohydrates), Fats: \(fats)"
+                            let newMeal = Meal(
+                                title: foodName.isEmpty ? "Unnamed Meal" : foodName,
+                                imageName: "fork.knife", // use default icon
+                                nutritionalInfo: info
+                            )
+                            mealViewModel.addMeal(newMeal)
                             navigateToResults = true
                         }
                         .frame(width: 300, height: 80)
@@ -123,14 +129,5 @@ struct NutritionResults: View {
     }
 }
 
-#Preview {
-    let mockUserViewModel = UserViewModel()
-    mockUserViewModel.firstName = "John"
-    
-    return NavigationStack {
-        NutritionResults(
-            image: .constant(UIImage(named: "fitnessApp")!),
-            userViewModel: mockUserViewModel
-        )
-    }
-}
+
+
