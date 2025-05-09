@@ -107,7 +107,7 @@ struct Profile: View {
                     Toggle(isOn: $notificationsEnabled) {
                         Text("Enable Notifications")
                     }
-                    .toggleStyle(SwitchToggleStyle(tint: .blue))
+                    .toggleStyle(SwitchToggleStyle(tint: .yellow))
                     .labelsHidden()
                 }
                 
@@ -119,7 +119,7 @@ struct Profile: View {
                         .fontWeight(.bold)
                         .padding()
                         .background(Color.yellow)
-                        .foregroundColor(.white)
+                        .foregroundColor(.black)
                         .cornerRadius(10)
                 }
                 .frame(maxWidth: .infinity)

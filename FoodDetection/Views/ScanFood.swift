@@ -21,6 +21,8 @@ struct ScanFood: View {
     @State private var navigationImage: UIImage? = nil
     @State private var navigateToResults = false
     
+    @StateObject private var mealViewModel = MealViewModel()
+    
     var body: some View {
         NavigationStack {
             ZStack {
@@ -87,6 +89,10 @@ struct ScanFood: View {
                         destination: NutritionResults(
                             image: .constant(image),
                             userViewModel: userViewModel
+                            
+                            //newMeal: $newMeal
+                            
+                            
                         ),
                         isActive: $navigateToResults
                     ) {
