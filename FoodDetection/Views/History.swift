@@ -79,11 +79,12 @@ struct Meal: Identifiable {
 }
 
 #Preview {
-    NutritionResults(
-        image: .constant(UIImage(named: "fitnessApp")!),
-        userViewModel: UserViewModel()
-    )
-    .environmentObject(MealViewModel())
+    //NutritionResults(
+     //   image: .constant(UIImage(named: "fitnessApp")!),
+      //  userViewModel: UserViewModel()
+      //  selectedTab: $selection
+   // )
+   // .environmentObject(MealViewModel())
 }
 
 

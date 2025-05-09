@@ -26,7 +26,7 @@ struct NutritionResults: View {
                 VStack {
                     Image(uiImage: image ?? UIImage(named: "fitnessApp")!)
                         .resizable()
-                        .frame(width: 300, height: 300)
+                        .frame(width: 250, height: 250)
                         .scaledToFit()
                         .cornerRadius(15)
                         .clipped()
@@ -84,7 +84,7 @@ struct NutritionResults: View {
                             mealViewModel.addMeal(newMeal)
                             navigateToResults = true
                         }
-                        .frame(width: 300, height: 80)
+                        .frame(width: 300, height: 50)
                         .background(Color.yellow)
                         .foregroundColor(.black)
                         .font(.system(size: 22, weight: .medium))
@@ -127,6 +127,18 @@ struct NutritionResults: View {
             UITabBar.appearance().tintColor = .white
         }
     }
+}
+
+#Preview {
+    let sampleImage = UIImage(named: "fitnessApp")
+    let sampleUserViewModel = UserViewModel() // Replace with real init if needed
+    let sampleMealViewModel = MealViewModel() // Replace with real init if needed
+
+    return NutritionResults(
+        image: .constant(sampleImage),
+        userViewModel: sampleUserViewModel
+    )
+    .environmentObject(sampleMealViewModel)
 }
 
 

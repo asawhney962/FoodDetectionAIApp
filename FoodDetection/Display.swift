@@ -17,7 +17,9 @@ struct Display: View {
     
     init() {
         let appearance = UITabBarAppearance()
+        UITabBar.appearance().unselectedItemTintColor = UIColor.black
     }
+    
     var body: some View {
         TabView {
             Tab("Home", systemImage: "house") {
