@@ -55,8 +55,9 @@ def gpt_estimate_nutrition_from_usda(image_base64: str, nutrition_summary: str) 
                 {
                     "type": "text",
                     "text": (
-                        "Given the food image and the USDA nutrition reference below, estimate a meal's typical ingredients and their quantities (in grams), and compute total nutrition.\n\n"
-                        "Respond ONLY in JSON format with:\n"
+                        "You're helping estimate nutrition for a  meal using an image and USDA summaries.\n"
+                        "Look at the image of the meal and analyze for ingredients and quantities (in grams), and total nutrition.\n\n"
+                        "Respond in this format:\n"
                         "{\n"
                         "  \"ingredients\": [\n"
                         "    {\"ingredient\": \"name\", \"quantity\": number },\n"
