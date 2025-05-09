@@ -1,14 +1,15 @@
 from openai import OpenAI
 import os
+import json
 from dotenv import load_dotenv
 
 load_dotenv()
 client = OpenAI(api_key=os.getenv("OPENAI_API_KEY"))
 
 
-def detect_ingredients_with_grams(image_base64: str) -> dict:
-    """Use GPT to detect food ingredients and estimate serving size in grams."""
-    completion = client.chat.completions.create(
+def gpt_estimate_nutrition(image_base64: str, nutrition_summary: str) -> dict:
+    """Ask GPT to estimate ingredients and nutrition in strict JSON format."""
+    response = client.chat.completions.create(
         model="gpt-4o",
         messages=[{
             "role": "user",
@@ -16,60 +17,20 @@ def detect_ingredients_with_grams(image_base64: str) -> dict:
                 {
                     "type": "text",
                     "text": (
-                        "Analyze this food image carefully.\n\n"
-                        "List each distinct food you see along with an estimated serving size in grams.\n"
-                        "Format exactly like this: Chicken: 100g, Rice: 80g, Broccoli: 50g.\n"
-                        "ONLY reply with this format, no other text or explanation."
-                    )
-                },
-                {
-                    "type": "image_url",
-                    "image_url": {
-                        "url": f"data:image/jpeg;base64,{image_base64}"
-                    },
-                }
-            ]
-        }]
-    )
-
-    raw_text = completion.choices[0].message.content.strip()
-    ingredients = {}
-    for item in raw_text.split(","):
-        if ":" in item:
-            food, grams = item.split(":")
-            try:
-                ingredients[food.strip()] = int(
-                    grams.strip().replace("g", "").strip())
-            except ValueError:
-                continue
-    return ingredients
-
-
-def gpt_estimate_nutrition_from_usda(image_base64: str, nutrition_summary: str) -> dict:
-    """Ask GPT to estimate nutrition based on image and USDA summary, return parsed dict."""
-    completion = client.chat.completions.create(
-        model="gpt-4o",
-        messages=[{
-            "role": "user",
-            "content": [
-                {
-                    "type": "text",
-                    "text": (
-                        "You're helping estimate nutrition for a  meal using an image and USDA summaries.\n"
-                        "Look at the image of the meal and analyze for ingredients and quantities (in grams), and total nutrition.\n\n"
-                        "Respond in this format:\n"
+                        "Estimate ingredients and nutrition for this food image.\n"
+                        "Respond ONLY in raw JSON. Do not include ```json or any markdown blocks.\n\n"
                         "{\n"
                         "  \"ingredients\": [\n"
-                        "    {\"ingredient\": \"name\", \"quantity\": number },\n"
+                        "    {\"name\": \"string\", \"quantity_grams\": number },\n"
                         "    ...\n"
                         "  ],\n"
-                        "  \"calories\": number,\n"
-                        "  \"protein\": number,\n"
-                        "  \"carbohydrates\": number,\n"
-                        "  \"fats\": number\n"
-                        "}\n\n"
-                        "USDA Nutrition Summary:\n"
-                        f"{nutrition_summary}"
+                        "  \"nutrition\": {\n"
+                        "    \"calories\": number,\n"
+                        "    \"protein_g\": number,\n"
+                        "    \"carbohydrates_g\": number,\n"
+                        "    \"fats_g\": number\n"
+                        "  }\n"
+                        "}"
                     )
 
                 },
@@ -77,23 +38,14 @@ def gpt_estimate_nutrition_from_usda(image_base64: str, nutrition_summary: str) 
                     "type": "image_url",
                     "image_url": {
                         "url": f"data:image/jpeg;base64,{image_base64}"
-                    },
+                    }
                 }
             ]
         }]
     )
 
-    # Use eval only in trusted local context — safer option: use `json.loads` after validation
-    import json
-    response_text = completion.choices[0].message.content.strip()
+    raw = response.choices[0].message.content.strip()
     try:
-        # Try parsing as JSON directly (if GPT behaved)
-        return json.loads(response_text)
+        return json.loads(raw)
     except Exception:
-        # fallback: try extracting JSON manually if needed
-        json_start = response_text.find("{")
-        json_end = response_text.rfind("}") + 1
-        try:
-            return json.loads(response_text[json_start:json_end])
-        except Exception as e:
-            return {"error": "Invalid JSON from GPT", "raw": response_text}
+        return {"error": "Invalid JSON", "raw": raw}
