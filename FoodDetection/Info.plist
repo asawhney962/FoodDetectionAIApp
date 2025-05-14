@@ -2,6 +2,8 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
+	<key>OpenAI_API_Key</key>
+	<string>REPLACE_WITH_YOUR_APIKEY</string>
 	<key>NSCameraUsageDescription</key>
 	<string>This app requires camera usage</string>
 	<key>CFBundleURLTypes</key>
