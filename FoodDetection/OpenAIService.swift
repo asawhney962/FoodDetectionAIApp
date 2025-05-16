@@ -52,7 +52,7 @@ class OpenAIService {
                   let choices = json["choices"] as? [[String: Any]],
                   let message = choices.first?["message"] as? [String: Any],
                   let content = message["content"] as? String else {
-                completion("Please input your API key for meal plan or nutiriton suggestions.")
+                completion("Please input your API key for meal plan or nutrition suggestions.")
                 return
             }
 
