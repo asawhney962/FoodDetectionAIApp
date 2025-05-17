@@ -17,9 +17,10 @@ def gpt_estimate_nutrition(image_base64: str, nutrition_summary: str) -> dict:
                 {
                     "type": "text",
                     "text": (
-                        "Estimate ingredients and nutrition for this food image.\n"
+                        "Estimate the dish name, ingredients, and nutrition for this food image.\n"
                         "Respond ONLY in raw JSON. Do not include ```json or any markdown blocks.\n\n"
                         "{\n"
+                        "  \"dish_name\": \"string\",\n"
                         "  \"ingredients\": [\n"
                         "    {\"name\": \"string\", \"quantity_grams\": number },\n"
                         "    ...\n"
@@ -32,6 +33,7 @@ def gpt_estimate_nutrition(image_base64: str, nutrition_summary: str) -> dict:
                         "  }\n"
                         "}"
                     )
+
 
                 },
                 {
