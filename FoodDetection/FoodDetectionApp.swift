@@ -11,6 +11,7 @@ import FirebaseCore
 @main
 
 struct FoodDetectionApp: App {
+    @StateObject private var mealViewModel = MealViewModel()
     
     init() {
         FirebaseApp.configure() // Initialize Firebase
@@ -19,6 +20,7 @@ struct FoodDetectionApp: App {
     var body: some Scene {
         WindowGroup {
             LogIn()
+                .environmentObject(mealViewModel)
         }
     }
 }

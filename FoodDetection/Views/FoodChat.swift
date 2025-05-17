@@ -49,7 +49,7 @@ struct FoodChat: View {
                             }
                         }.rotationEffect(.degrees(180))
                     }.rotationEffect(.degrees(180))
-                        //.background(Color.gray.opacity(0.5))
+                    //.background(Color.gray.opacity(0.5))
                     
                     HStack {
                         TextField("Type Something", text: $messageText)
@@ -90,15 +90,23 @@ struct FoodChat: View {
     func sendMessage(message: String) {
         withAnimation {
             messages.append("[USER]" + message)
-            self.messageText = ""
+            self.messageText = "" // Clear the input field
         }
         
-        DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
-            withAnimation() {
-                messages.append(getBotReponse(message: message))
+        let prompt = "You are a nutritionist specializing in healthy meal plans. Please provide a balanced, healthy, and simple meal plan suggestion based on the user's request. Keep your response concise and focused on nutrition."
+        
+        let fullPrompt = prompt + "\n\nUser: " + message + "\nChatbot:"
+
+        OpenAIService.shared.sendMessage(fullPrompt) { reply in
+            DispatchQueue.main.async {
+                withAnimation {
+                    // Append the AI's response to the chat
+                    messages.append(reply.trimmingCharacters(in: .whitespacesAndNewlines))
+                }
             }
         }
     }
+
 }
 
 #Preview {
